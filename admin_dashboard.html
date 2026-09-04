@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard - College Notice Hub{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+    <h2 class="section-title mb-0">Admin Dashboard</h2>
+    <div class="mt-2 mt-md-0">
+      <a href="{{ url_for('add_notice') }}" class="btn btn-primary me-2">
+        <i class="fa-solid fa-plus"></i> Add Notice
+      </a>
+      <a href="{{ url_for('notices') }}" class="btn btn-outline-primary me-2">
+        <i class="fa-solid fa-list"></i> Manage Notices
+      </a>
+      <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </a>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="row g-3 mb-5">
+    <div class="col-6 col-lg-3">
+      <div class="stat-card p-4 text-center">
+        <div class="stat-number">{{ stats.total }}</div>
+        <div class="stat-label">Total Notices</div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="stat-card p-4 text-center">
+        <div class="stat-number">{{ stats.examination }}</div>
+        <div class="stat-label">Examination</div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="stat-card p-4 text-center">
+        <div class="stat-number">{{ stats.placement }}</div>
+        <div class="stat-label">Placement</div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="stat-card p-4 text-center">
+        <div class="stat-number">{{ stats.events }}</div>
+        <div class="stat-label">Events</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECENT NOTICES TABLE -->
+  <h4 class="fw-bold mb-3">Recent Notices</h4>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle bg-white admin-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Published</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for notice in notices %}
+        <tr>
+          <td>{{ notice['title'] }}</td>
+          <td><span class="badge notice-badge">{{ notice['category'] }}</span></td>
+          <td>{{ format_date(notice['published_date']) }}</td>
+          <td class="text-end">
+            <a href="{{ url_for('notice_details', notice_id=notice['id']) }}" class="btn btn-sm btn-outline-secondary" title="View">
+              <i class="fa-solid fa-eye"></i>
+            </a>
+            <a href="{{ url_for('edit_notice', notice_id=notice['id']) }}" class="btn btn-sm btn-outline-primary" title="Edit">
+              <i class="fa-solid fa-pen"></i>
+            </a>
+            <form action="{{ url_for('delete_notice', notice_id=notice['id']) }}" method="post" class="d-inline"
+                  onsubmit="return confirm('Are you sure you want to delete this notice?');">
+              <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="text-center text-muted py-4">No notices found</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

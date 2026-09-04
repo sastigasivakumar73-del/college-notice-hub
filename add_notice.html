@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Add Notice - College Notice Hub{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h2 class="section-title mb-4">Add New Notice</h2>
+
+      <form method="post" action="{{ url_for('add_notice') }}" enctype="multipart/form-data" class="form-card p-4 p-md-5">
+        <div class="mb-3">
+          <label class="form-label">Notice Title</label>
+          <input type="text" name="title" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea name="description" rows="4" class="form-control" required></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Category</label>
+            <select name="category" class="form-select" required>
+              <option value="" disabled selected>Choose category</option>
+              {% for cat in categories %}
+              <option value="{{ cat }}">{{ cat }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Published Date</label>
+            <input type="date" name="published_date" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Notice File (PDF, JPG, JPEG, PNG)</label>
+          <input type="file" name="notice_file" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
+          <div class="form-text">Maximum file size: 5 MB</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">
+          <i class="fa-solid fa-paper-plane"></i> Publish Notice
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

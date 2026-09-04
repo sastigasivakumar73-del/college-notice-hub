@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}College Notice Hub - Home{% endblock %}
+
+{% block content %}
+
+  <!-- HERO SECTION -->
+  <section class="hero-section text-center text-white">
+    <div class="container py-5">
+      <h1 class="display-5 fw-bold">College Notice Hub</h1>
+      <p class="lead">Stay updated with all your college notices in one place.</p>
+      <div class="mt-4">
+        <a href="{{ url_for('notices') }}" class="btn btn-light btn-lg me-2 mb-2">
+          <i class="fa-solid fa-bell"></i> View Notices
+        </a>
+        <a href="#categories" class="btn btn-outline-light btn-lg mb-2">
+          <i class="fa-solid fa-layer-group"></i> Browse Categories
+        </a>
+      </div>
+
+      <!-- SEARCH BAR -->
+      <form action="{{ url_for('notices') }}" method="get" class="search-bar-wrapper mt-4 mx-auto">
+        <div class="input-group input-group-lg">
+          <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" name="q" class="form-control" placeholder="Search notices...">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- CATEGORY SECTION -->
+  <section id="categories" class="container py-5">
+    <h2 class="section-title text-center mb-4">Browse by Category</h2>
+    <div class="row g-3">
+      {% for cat in categories %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="{{ url_for('notices', category=cat) }}" class="text-decoration-none">
+          <div class="category-card text-center p-4 h-100">
+            <div class="category-icon">{{ category_icons[cat] }}</div>
+            <div class="fw-semibold mt-2">{{ cat }}</div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- LATEST NOTICES -->
+  <section class="container py-5">
+    <h2 class="section-title text-center mb-4">Latest Notices</h2>
+
+    {% if notices|length == 0 %}
+      <p class="text-center text-muted">No notices found</p>
+    {% else %}
+    <div class="row g-4">
+      {% for notice in notices %}
+      <div class="col-md-6 col-lg-4">
+        <div class="notice-card h-100 p-4">
+          <span class="badge notice-badge mb-2">{{ category_icons[notice['category']] }} {{ notice['category'] }}</span>
+          <h5 class="fw-bold">{{ notice['title'] }}</h5>
+          <p class="text-muted notice-desc">{{ notice['description'] }}</p>
+          <p class="small text-secondary mb-3">
+            <i class="fa-regular fa-calendar"></i> Published: {{ format_date(notice['published_date']) }}
+          </p>
+          <a href="{{ url_for('notice_details', notice_id=notice['id']) }}" class="btn btn-outline-primary btn-sm">
+            View Notice <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+      <a href="{{ url_for('notices') }}" class="btn btn-primary">See All Notices</a>
+    </div>
+  </section>
+
+{% endblock %}

@@ -1,0 +1,192 @@
+/* ==========================================================
+   College Notice Hub - Custom Styles
+   Professional Blue / White Theme
+   ========================================================== */
+
+:root {
+  --primary-blue: #1d4ed8;
+  --dark-blue: #1e3a8a;
+  --light-blue: #eff6ff;
+  --accent-blue: #3b82f6;
+  --text-dark: #1f2937;
+  --text-muted: #6b7280;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: #f8fafc;
+  color: var(--text-dark);
+}
+
+/* ---------- NAVBAR ---------- */
+.main-navbar {
+  background: linear-gradient(90deg, var(--dark-blue), var(--primary-blue));
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.main-navbar .nav-link {
+  font-weight: 500;
+}
+
+.main-navbar .nav-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* ---------- HERO ---------- */
+.hero-section {
+  background: linear-gradient(135deg, var(--dark-blue), var(--accent-blue));
+}
+
+.search-bar-wrapper {
+  max-width: 600px;
+}
+
+/* ---------- SECTION TITLES ---------- */
+.section-title {
+  font-weight: 700;
+  color: var(--dark-blue);
+  position: relative;
+}
+
+/* ---------- CATEGORY CARDS ---------- */
+.category-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--text-dark);
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.15);
+}
+
+.category-icon {
+  font-size: 2.2rem;
+}
+
+/* ---------- NOTICE CARDS ---------- */
+.notice-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.notice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(29, 78, 216, 0.12);
+}
+
+.notice-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.notice-badge {
+  background-color: var(--light-blue);
+  color: var(--primary-blue);
+  font-weight: 600;
+  padding: 0.5em 0.8em;
+}
+
+/* ---------- FILTER BAR ---------- */
+.filter-bar {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ---------- NOTICE DETAILS ---------- */
+.notice-details-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.pdf-viewer-wrapper {
+  width: 100%;
+}
+
+.pdf-embed {
+  width: 100%;
+  height: 75vh;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.notice-image {
+  border-radius: 10px;
+  max-height: 600px;
+  border: 1px solid #e5e7eb;
+}
+
+/* ---------- AUTH / FORM CARDS ---------- */
+.auth-card,
+.form-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------- ADMIN DASHBOARD ---------- */
+.stat-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-top: 4px solid var(--primary-blue);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--dark-blue);
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.admin-table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ---------- ERROR PAGES ---------- */
+.error-page {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.error-code {
+  font-size: 6rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+}
+
+/* ---------- FOOTER ---------- */
+.site-footer {
+  background: var(--dark-blue);
+  color: #ffffff;
+}
+
+/* ---------- RESPONSIVE TWEAKS ---------- */
+@media (max-width: 576px) {
+  .hero-section h1 {
+    font-size: 1.8rem;
+  }
+  .error-code {
+    font-size: 4rem;
+  }
+  .pdf-embed {
+    height: 60vh;
+  }
+}

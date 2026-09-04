@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ notice['title'] }} - College Notice Hub{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+  <a href="{{ url_for('notices') }}" class="btn btn-link mb-3 ps-0">
+    <i class="fa-solid fa-arrow-left"></i> Back to Notices
+  </a>
+
+  <div class="notice-details-card p-4 p-md-5">
+    <span class="badge notice-badge mb-2">{{ category_icons[notice['category']] }} {{ notice['category'] }}</span>
+    <h1 class="fw-bold mt-2">{{ notice['title'] }}</h1>
+    <p class="text-secondary mb-4">
+      <i class="fa-regular fa-calendar"></i> Published: {{ format_date(notice['published_date']) }}
+    </p>
+
+    <p class="fs-5">{{ notice['description'] }}</p>
+
+    {% if notice['filename'] %}
+      <hr class="my-4">
+      <h5 class="fw-bold mb-3">Attached Notice</h5>
+
+      {% set file_url = url_for('uploaded_file', filename=notice['filename']) %}
+
+      {% if notice['file_type'] == 'pdf' %}
+        <div class="pdf-viewer-wrapper mb-3">
+          <iframe src="{{ file_url }}" class="pdf-embed" title="{{ notice['title'] }}"> <p>Your browser does not support inline PDFs. <a href="{{ file_url }}" target="_blank">Click here to view the PDF</a>.</p> </iframe>
+        </div>
+        <a href="{{ file_url }}" target="_blank" class="btn btn-primary me-2">
+          <i class="fa-solid fa-file-pdf"></i> View PDF
+        </a>
+        <a href="{{ file_url }}" download class="btn btn-outline-primary">
+          <i class="fa-solid fa-download"></i> Download PDF
+        </a>
+      {% else %}
+        <img src="{{ file_url }}" alt="{{ notice['title'] }}" class="img-fluid notice-image mb-3">
+        <br>
+        <a href="{{ file_url }}" download class="btn btn-outline-primary">
+          <i class="fa-solid fa-download"></i> Download Image
+        </a>
+      {% endif %}
+    {% else %}
+      <p class="text-muted fst-italic mt-4">No attachment for this notice.</p>
+    {% endif %}
+  </div>
+
+  <a href="{{ url_for('notices') }}" class="btn btn-link mt-3 ps-0">
+    <i class="fa-solid fa-arrow-left"></i> Back to Notices
+  </a>
+</section>
+{% endblock %}
